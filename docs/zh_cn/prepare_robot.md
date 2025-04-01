@@ -1,24 +1,24 @@
-# Preparing a robot for simulation in MuJoCo
+# 在MuJoCo中仿真机器人的准备
 
-## If you designed your robot in OnShape
+## 如果你在OnShape中设计了你的机器人
 
-### Make sure to design you robot according to onshape-to-robot constraints
+### 确保根据onshape-to-robot的约束设计你的机器人
 https://onshape-to-robot.readthedocs.io/en/latest/design.html
 
 
-The urdf will contain frames named `closing_<...>_1` and `closing_<...>_2` that you can use to close the loops in the mjcf file.
+生成的urdf文件将包含名为`closing_<...>_1`和`closing_<...>_2`的框架，你可以在mjcf文件中使用它们来闭合循环。
 
-### Get get robot urdf from onshape
+### 从OnShape获取机器人urdf
 
-Run
+运行以下命令：
 
 ```bash
 $ onshape-to-robot robots/bd1/
 ```
 
-#### (Optional) If you have closing loops, follow the instructions for handling them in the documentation of onshape-to-robotn then:
+#### （可选）如果你有闭合循环，请按照onshape-to-robot文档中的说明进行处理，然后：
 
-In `robot.urdf`, add : 
+在`robot.urdf`中添加：
 ```xml
 <robot name="...">
     <mujoco>
@@ -28,20 +28,20 @@ In `robot.urdf`, add :
 </robot>
 ```
 
-# Convert URDF to MJCF (MuJoCo)
+# 将URDF转换为MJCF（MuJoCo）
 
-## Get MuJoCo binaries
+## 获取MuJoCo二进制文件
 
-Download mujoco binaries somewhere https://github.com/google-deepmind/mujoco/releases
+从以下地址下载MuJoCo二进制文件：https://github.com/google-deepmind/mujoco/releases
 
-unpack and run
+解压并运行：
 
 ```bash
 $ ./compile robot.urdf robot.xml
 ```
 
-## In robot.xml, add actuators : 
-Example : 
+## 在robot.xml中添加执行器：
+示例：
 ```xml
 	<actuator>
 		<position name="left_hip_yaw"    joint="left_hip_yaw"    inheritrange="1"/>
@@ -60,9 +60,9 @@ Example :
 	</actuator>
 ```
 
-## Add a freejoint 
+## 添加自由关节
 
-encapsulate the body in a freejoint
+将主体封装在一个自由关节中：
 ```xml
 <worldbody>
 	<body>
@@ -73,16 +73,16 @@ encapsulate the body in a freejoint
 </worldbody>
 ```
 
-## (Optional) Constrain closing loop
+## （可选）约束闭合循环
 
-Add the following to the mjcf file
+在mjcf文件中添加以下内容：
 ```xml
 <equality>
     <connect body1="closing_<...>_1" body2="closing_<...>_2" anchor="x y z" />
 </equality>
 ```
 
-the x, y, z values can be found in the .urdf 
+x, y, z 的值可以在 .urdf 文件中找到：
 
 ```xml
 <joint name="closing_<...>_1_frame" type="fixed">
@@ -91,9 +91,9 @@ the x, y, z values can be found in the .urdf
 </joint>
 ```
 
-## Setup collision groups, damping and friction
-/!\ remove actuatorfrcrange in joints
-Put that inside the <mujoco> bracket
+## 设置碰撞组、阻尼和摩擦
+/!\ 删除关节中的actuatorfricrange
+将其放入<mujoco>标签内：
 ```xml
 <mujoco>
   <default>
@@ -106,17 +106,17 @@ Put that inside the <mujoco> bracket
 </mujoco>
 ```
 
-still need to add : 
+还需要添加：
 - change frames to sites
 
 
-## Visualize 
+## 可视化
 
 ```bash
 $ python3 -m mujoco.viewer --mjcf=<path>/scene.xml
 ```
 
-or 
+或者
 
 ```bash
 $ <path_to_mujoco_bin>/bin/simulate <path>/scene.xml

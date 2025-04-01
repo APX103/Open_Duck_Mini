@@ -1,5 +1,7 @@
 # Open Duck Mini v2
 
+[中文](./README_zh.md)
+
 <table>
   <tr>
     <td> <img src="https://github.com/user-attachments/assets/1cec3e46-de46-4abb-9c9e-20f936f15121" alt="1" width="300px" ></td>

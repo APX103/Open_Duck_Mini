@@ -1,14 +1,14 @@
-# Print guide
+# 3D 打印指南
 
-You can find the `.stl` files under the `print/` directory at the root of this repo. 
+你可以在项目根目录的 `print/` 目录下找到 `.stl` 文件。
 
-All the parts are printed in standard PLA with 15% infill, except for `foot_bottom_tpu.stl`, which is to be printed in TPU at 40% infill.
+所有的部件都使用标准 PLA 打印，填充滤设置15%，除了 `foot_bottom_tpu.stl`，它使用 TPU 打印，填充率是 40%。
 
-## Parts to print
+## 各个部件打印份数
 - foot_top.stl x2
 - foot_side.stl x2
 - foot_bottom_pla.stl x2
-- foot_bottom_tpu.stl x2 (TPU)
+- foot_bottom_tpu.stl x2 **(TPU)**
 - knee_to_ankle_left_sheet.stl x4
 - knee_to_ankle_right_sheet.stl x4
 - leg_spacer.stl x4
@@ -34,5 +34,3 @@ All the parts are printed in standard PLA with 15% infill, except for `foot_bott
 - body_middle_top.stl x1
 - body_back.stl x1
 - battery_pack_lid.stl x1
-
-- 
